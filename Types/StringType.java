@@ -1,5 +1,5 @@
 
-package ds.project;
+package ds.project.Types;
 
 import java.util.List;
 
@@ -11,8 +11,9 @@ public class StringType extends ValueFields {
 
     private String value;
 
-    public StringType(Object value) {
-        super(value, STRING);
+    public StringType(String value) {
+        super(STRING);
+        this.value = value;
     }
 
     @Override
@@ -23,15 +24,14 @@ public class StringType extends ValueFields {
             throw new IllegalArgumentException("Invalid value type. Expected String.");
         }
     }
+    
+    public String getValue() {
+        return value;
+    }
 
     @Override
     public Class<?> getClassType() {
         return String.class;
-    }
-
-    @Override
-    public List<?> getListValue() {
-        throw new UnsupportedOperationException("Unavailable"); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

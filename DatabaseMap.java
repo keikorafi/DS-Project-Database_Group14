@@ -1,5 +1,7 @@
 package ds.project;
 
+import ds.project.Types.ValueFields;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -125,18 +127,15 @@ public class DatabaseMap<K, V extends ValueFields> {
         return false;
     }
 
-    public String toString() {
-        String output = "";
+    public List<ValueFields> getMany() {
+        List<ValueFields> valueList = new ArrayList<>();
         int[] list = hashList.toArray();
         for (int i = 0; i < list.length; i++) {
-            ValueFields value = map[list[i]].value;
-            if (value.getType().equals(ValueFields.COLLECTION)){
-                output += value.getListValue().toString() + " ";
+            if (map[list[i]] == null) {
+                continue;
             }
-            else {
-                output += value.getValue() + " ";
-            }
+            valueList.add(map[list[i]].getValue());
         }
-        return output;
+        return valueList;
     }
 }

@@ -1,4 +1,4 @@
-package ds.project;
+package ds.project.Types;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ public class NumeralType extends ValueFields {
 
     private Number value;
 
-    public NumeralType(Object value) {
-        super(value, NUMBER);
+    public NumeralType(Number value) {
+        super(NUMBER);
     }
 
     @Override
@@ -22,15 +22,14 @@ public class NumeralType extends ValueFields {
             throw new IllegalArgumentException("Invalid value type. Expected Numbers.");
         }
     }
+    
+    public Number getValue() {
+        return value;
+    }
 
     @Override
     public Class<?> getClassType() {
         return Number.class;
-    }
-
-    @Override
-    public List<?> getListValue() {
-        throw new UnsupportedOperationException("Unavailable"); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -1,5 +1,10 @@
 package ds.project;
 
+import ds.project.Types.CharacterType;
+import ds.project.Types.CollectionType;
+import ds.project.Types.NumeralType;
+import ds.project.Types.StringType;
+import ds.project.Types.ValueFields;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,17 +17,35 @@ public class Tester {
 
     public static void main(String[] args) {
         Database database = new Database();
-        Integer[] arr = {1, 3, 3};
-        database.add("One", ValueFields.STRING, "Hello");
-        database.addList("Two", listConvert(arr));
-        database.add("Three", ValueFields.STRING, "Hi");
-        ValueFields value = new CollectionsType(listConvert(arr));
-        List<Integer> a = (List<Integer>) value.getListValue();
-        System.out.println(a.toString());
+        Integer[] arr = {23, 4};
+        database.add("One", new StringType("Hello"));
+        database.add("Three", new StringType("Hi"));
+        database.add("Two", new CollectionType(listConvert(arr)));
+        database.display();
+        List<Integer> integerList = valueConvert(database.get("Two"));
+        System.out.println(integerList);
     }
-    
+
     public static <T> List<T> listConvert(T[] a) {
         return Arrays.stream(a).collect(Collectors.toList());
+    }
+
+    public static <T> T valueConvert(ValueFields value) {
+        switch (value.getType()) {
+            case ValueFields.STRING:
+                StringType type1 = (StringType) value;
+                return (T) type1.getValue();
+            case ValueFields.CHARACTER:
+                CharacterType type2 = (CharacterType) value;
+                return (T) type2.getValue();
+            case ValueFields.NUMBER:
+                NumeralType type3 = (NumeralType) value;
+                return (T) type3.getValue();
+            case ValueFields.COLLECTION:
+                CollectionType type4 = (CollectionType) value;
+                return (T) type4.getValue();
+        }
+        return null;
     }
 
 }

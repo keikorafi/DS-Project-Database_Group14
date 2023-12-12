@@ -1,6 +1,4 @@
-
-
-package ds.project;
+package ds.project.Types;
 
 import java.util.List;
 
@@ -10,10 +8,11 @@ import java.util.List;
  */
 public class CharacterType extends ValueFields {
 
-    private Character value;
+    private char value;
 
-    public CharacterType(Object value) {
-        super(value, CHARACTER);
+    public CharacterType(char value) {
+        super(CHARACTER);
+        this.value = value;
     }
 
     @Override
@@ -25,14 +24,13 @@ public class CharacterType extends ValueFields {
         }
     }
 
+    public Character getValue() {
+        return value;
+    }
+    
     @Override
     public Class<?> getClassType() {
         return Character.class;
-    }
-
-    @Override
-    public List<?> getListValue() {
-        throw new UnsupportedOperationException("Unavailable"); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
