@@ -15,15 +15,6 @@ public class CharacterType extends ValueFields {
         this.value = value;
     }
 
-    @Override
-    public void setValue(Object value) {
-        if (value instanceof Character) {
-            this.value = (Character) value;
-        } else {
-            throw new IllegalArgumentException("Invalid value type. Expected Character.");
-        }
-    }
-
     public Character getValue() {
         return value;
     }

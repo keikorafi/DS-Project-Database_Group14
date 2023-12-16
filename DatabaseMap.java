@@ -1,9 +1,6 @@
 package ds.project;
 
 import ds.project.Types.ValueFields;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @dzxky_
@@ -30,7 +27,7 @@ public class DatabaseMap<K, V extends ValueFields> {
     private float loadFactor;
     private int size;
     private Node<K, V>[] map;
-    private HashList hashList;
+    private HashList<K> hashList;
 
     public DatabaseMap() {
         this(16, 0.75f);
@@ -40,7 +37,7 @@ public class DatabaseMap<K, V extends ValueFields> {
         this.capacity = capacity;
         this.loadFactor = loadFactor;
         this.map = new Node[capacity];
-        this.hashList = new HashList();
+        this.hashList = new HashList<>();
     }
 
     private int hash(K key) {
@@ -49,7 +46,7 @@ public class DatabaseMap<K, V extends ValueFields> {
 
     public void put(K key, V value) {
         int index = hash(key);
-        hashList.add(index);
+        hashList.add(key);
         Node<K, V> node = map[index];
         while (node != null) {
             if (node.key.equals(key)) {
@@ -66,6 +63,19 @@ public class DatabaseMap<K, V extends ValueFields> {
             resize();
         }
     }
+    
+    public boolean set(K key, V value) {
+        int index = hash(key);
+        Node<K, V> node = map[index];
+        while (node != null) {
+            if (node.key.equals(key)) {
+                node.value = value;
+                return true;
+            }
+            node = node.nextNode;
+        }
+        return false;
+    }
 
     public V get(K key) {
         int index = hash(key);
@@ -81,7 +91,7 @@ public class DatabaseMap<K, V extends ValueFields> {
 
     public void remove(K key) {
         int index = hash(key);
-        hashList.remove(index);
+        hashList.remove(key);
         Node<K, V> node = map[index];
         Node<K, V> prev = null;
         while (node != null) {
@@ -127,14 +137,10 @@ public class DatabaseMap<K, V extends ValueFields> {
         return false;
     }
 
-    public List<ValueFields> getMany() {
-        List<ValueFields> valueList = new ArrayList<>();
-        int[] list = hashList.toArray();
-        for (int i = 0; i < list.length; i++) {
-            if (map[list[i]] == null) {
-                continue;
-            }
-            valueList.add(map[list[i]].getValue());
+    public HashList<ValueFields> getMany() {
+        HashList<ValueFields> valueList = new HashList<>();
+        for (K key : hashList) {
+            valueList.add(get(key));
         }
         return valueList;
     }

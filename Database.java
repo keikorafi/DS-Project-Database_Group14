@@ -5,7 +5,6 @@ import ds.project.Types.CollectionType;
 import ds.project.Types.NumeralType;
 import ds.project.Types.StringType;
 import ds.project.Types.ValueFields;
-import java.util.List;
 
 /**
  *
@@ -28,7 +27,7 @@ public class Database {
     }
     
     public void delete(String index) {
-        if (!database.containsKey(index)) {
+        if (database.containsKey(index)) {
             database.remove(index);
         } else {
             System.out.println("Index does not exist!");
@@ -42,25 +41,35 @@ public class Database {
         return null;
     }
     
+    public boolean set(String index, ValueFields value) {
+        if (database.containsKey(index)) {
+            database.set(index, value);
+            return true;
+        } else {
+            System.out.println("Index does not exist!");
+        }
+        return false;
+    }
+    
     public void display() {
-        List<ValueFields> valueList = database.getMany();
+        HashList<ValueFields> valueList = database.getMany();
         for (ValueFields value : valueList) {
             switch (value.getType()) {
                 case ValueFields.STRING:
                     StringType type1 = (StringType) value;
-                    System.out.println(type1.getValue());
+                    System.out.println(type1.getValue() + " " + type1.getType());
                     break;
                 case ValueFields.CHARACTER:
                     CharacterType type2 = (CharacterType) value;
-                    System.out.println(type2.getValue());
+                    System.out.println(type2.getValue() + " " + type2.getType());
                     break;
                 case ValueFields.NUMBER:
                     NumeralType type3 = (NumeralType) value;
-                    System.out.println(type3.getValue());
+                    System.out.println(type3.getValue() + " " + type3.getType());
                     break;
                 case ValueFields.COLLECTION:
                     CollectionType type4 = (CollectionType) value;
-                    System.out.println(type4.getValue().toString());
+                    System.out.println(type4.getValue().toString() + " " + type4.getType());
                     break;
             }
         }

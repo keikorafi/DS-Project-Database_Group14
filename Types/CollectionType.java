@@ -16,15 +16,6 @@ public class CollectionType extends ValueFields {
     }
 
     @Override
-    public void setValue(Object value) {
-        if (value instanceof Character) {
-            this.value = (List<?>) value;
-        } else {
-            throw new IllegalArgumentException("Invalid value type. Expected Character.");
-        }
-    }
-
-    @Override
     public Class<?> getClassType() {
         return Character.class;
     }

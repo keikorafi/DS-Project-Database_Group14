@@ -14,15 +14,6 @@ public class NumeralType extends ValueFields {
         super(NUMBER);
     }
 
-    @Override
-    public void setValue(Object value) {
-        if (value instanceof Number) {
-            this.value = (Number) value;
-        } else {
-            throw new IllegalArgumentException("Invalid value type. Expected Numbers.");
-        }
-    }
-    
     public Number getValue() {
         return value;
     }

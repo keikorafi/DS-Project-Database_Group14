@@ -19,8 +19,6 @@ public abstract class ValueFields {
         this.type = type;
     }
 
-    public abstract void setValue(Object value);
-
     public abstract Class<?> getClassType();
 
     public String getType() {

@@ -15,15 +15,6 @@ public class StringType extends ValueFields {
         super(STRING);
         this.value = value;
     }
-
-    @Override
-    public void setValue(Object value) {
-        if (value instanceof String) {
-            this.value = (String) value;
-        } else {
-            throw new IllegalArgumentException("Invalid value type. Expected String.");
-        }
-    }
     
     public String getValue() {
         return value;
