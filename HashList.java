@@ -58,6 +58,10 @@ public class HashList<E> implements Iterable<E> {
         }
         return false;
     }
+    
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
     public E get(int index) {
         if (index < 0 || index >= size) {

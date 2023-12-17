@@ -108,6 +108,13 @@ public class DatabaseMap<K, V extends ValueFields> {
             node = node.nextNode;
         }
     }
+    
+    public void clear() {
+        for (int i = 0; i < hashList.size(); i++) {
+            remove(hashList.get(0));
+            hashList.remove(hashList.get(0));
+        }
+    }
 
     public void resize() {
         int newCapacity = capacity * 2;
@@ -143,5 +150,9 @@ public class DatabaseMap<K, V extends ValueFields> {
             valueList.add(get(key));
         }
         return valueList;
+    }
+    
+    public HashList<K> getKeys() {
+        return hashList;
     }
 }

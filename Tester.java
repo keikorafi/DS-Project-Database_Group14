@@ -17,13 +17,13 @@ public class Tester {
 
     public static void main(String[] args) {
         Database database = new Database();
-        Number[] arr = {23.4, 4.3};
+        Integer[] arr = {23, 4};
         database.add("One", new StringType("Hisd"));
         database.add("Three", new StringType("Hi"));
         database.add("Four", new StringType("234"));
-        database.set("Three", new StringType("Hello"));
         database.add("Two", new CollectionType(listConvert(arr)));
         database.display();
+        database.toCSV("WOW.csv");
     }
 
     public static <T> List<T> listConvert(T[] a) {
